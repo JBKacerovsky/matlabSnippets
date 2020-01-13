@@ -6,8 +6,8 @@ function sphereImage = voxelSphereCreator(sphereImage, r, x, y, z, varargin)
 % Sphere-voxels will be set to 1 in the output matrix
 % 
 % Syntax:  
-%     sphereImage = voxelSphereCreator(sphereImage, r, y, x, z, varargin)
-%     [output1,output2] = function_name(input1,input2,input3)
+%     sphereImage = voxelSphereCreator(sphereImage, r, y, x, z)
+%     sphereImage = voxelSphereCreator(sphereImage, r, y, x, z, ...)
 % 
 % Inputs:
 %    sphereImage - target matrix NxNxN
