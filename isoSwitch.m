@@ -4,6 +4,7 @@ function FV=isoSwitch(FV)
 % function to create a triangulated mesh from a binary image (bw matrix),
 % with respect to the original image
 %
+%
 % these three lines switch it back
 temp=FV.vertices;
 FV.vertices(:, 1)=temp(:, 2);
