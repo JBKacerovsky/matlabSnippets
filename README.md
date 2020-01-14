@@ -28,14 +28,14 @@ These functions were primarily written to create test objects of known underlyin
 VoxelSphereCreator - creates a (binary) voxelated sphere of defined radius around a defined point in a given 3D matrix/image. 
     spheres can optionally be deformed along the main axes to create ellipsoids
 
-meshSphereCreator - Creates a triangulated sphere of defined radius using Matlab's built isosurface function. 
+meshSphereCreator - Creates a triangulated sphere of a defined radius using Matlab's built isosurface function. 
     spheres can optionally be deformed along the main axes to create ellipsoids
 
 
 TINY FUNCTIONS:
-these are really tiny snippets (just a few lines) that really don't do much but do save a bit of repetitive typing. These were nuisance enough for me at one point to make them into functions
+these are tiny snippets (just a few lines) that really don't do very much but do save a bit of repetitive typing. These were nuisance enough for me at one point to make them into functions
 
-isoSwitch - switch the 1st and 2nd column of vertex coordinates (x, y) in a FV struct.
+isoSwitch - switch the 1st and 2nd column of vertex coordinates (x, y) in an FV struct.
 	For some reason, x and y coordinates are switched when using the isosurface function to create a triangulated mesh from a binary image (bw matrix), with respect to the original image. These three lines switch them back (aligning the mesh and original image)
 
 findIdx - returns xyz index of voxels > 0 as Nx3 matrix
