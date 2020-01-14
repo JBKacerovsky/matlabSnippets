@@ -1,5 +1,5 @@
 function FV=isoSwitch(FV)
-% isoSwitch - tiny function to swith the 1st and 2nd column of vertex coordinates 
+% isoSwitch - tiny function to switch the 1st and 2nd column of vertex coordinates 
 % (x, y) in a FV struct
 %
 % for some reason x and ycoordinates are swithed when using the isosurface
