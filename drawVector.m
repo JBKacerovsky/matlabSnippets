@@ -62,7 +62,7 @@ function q=drawVector(points, vectors, color, weigth, MaxHeadsize)
 % Author: J. Benjamin Kacerovsky
 % Centre for Research in Neuroscience, McGill University
 % email: johannes.kacerovsky@mail.mcgill.ca
-% December 2019; Last revision: 19 December 2019
+% December 2019; ; Last revision: 15-Jan-2020 
 %
 %------------- BEGIN CODE --------------
 
