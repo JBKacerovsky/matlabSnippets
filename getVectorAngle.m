@@ -1,5 +1,9 @@
 function vectorAngle=getVectorAngle(vector1, vector2, angleType)
 % getVectorAngle - calculate the angle between 2 n-dimensional vectors 
+%
+% this is simply an implementation of:
+% https://www.mathworks.com/matlabcentral/answers/16243-angle-between-two-vectors-in-3d
+% as a function
 % 
 % Syntax:  
 %     vectorAngle=getVectorAngle(vector1, vector2)
@@ -31,6 +35,7 @@ function vectorAngle=getVectorAngle(vector1, vector2, angleType)
 
 % ------------- BEGIN CODE --------------
 
+% 
 if nargin==2
     angleType=1;
 end
@@ -39,4 +44,14 @@ if angleType==2
 else
     vectorAngle=acosd(dot(vector1, vector2)/(norm(vector1)*norm(vector2)));
 end
+
+% if nargin==2
+%     angleType=1;
+% end
+% if angleType==2
+%     vectorAngle=atan2(norm(cross(vector1,vector2)), dot(vector1,vector2));
+% else
+%     vectorAngle=atan2d(norm(cross(vector1,vector2)), dot(vector1,vector2));
+% end
+
 %------------- END OF CODE --------------
