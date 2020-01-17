@@ -1,4 +1,4 @@
-function q=drawVector(points, vectors, color, weigth, MaxHeadsize)
+function q=drawVector(points, vectors, color, weight, MaxHeadsize)
 % drawVector - draws 2D or 3D vectors from specified points
 % 
 % this is a very simple function to make drawing vectors using the 
@@ -68,7 +68,7 @@ function q=drawVector(points, vectors, color, weigth, MaxHeadsize)
 
 % % complete inputs if necessary
 if nargin<3; color='red'; end
-if nargin<4; weigth=3; end
+if nargin<4; weight=3; end
 if nargin<5; MaxHeadsize=weight; end
 
 % % check points list
@@ -85,12 +85,12 @@ end
 % % 3D case
 if size(vectors, 2)==3&&size(points, 2)==3 
     q=quiver3(points(:, 1), points(:, 2), points(:, 3), vectors(:, 1), vectors(:, 2), vectors(:, 3), 0, 'Color', color,...
-        'LineWidth', weigth, 'MaxHeadSize', MaxHeadsize);
+        'LineWidth', weight, 'MaxHeadSize', MaxHeadsize);
 
 % % 2D case
 elseif size(vectors, 2)==2&&size(points, 2)==2 
     q=quiver(points(:, 1), points(:, 2), vectors(:, 1), vectors(:, 2), 0, 'Color', color,...
-        'LineWidth', weigth, 'MaxHeadSize', MaxHeadsize);
+        'LineWidth', weight, 'MaxHeadSize', MaxHeadsize);
     
 % % dimension error or mismatch --> error message and stop     
 else 
