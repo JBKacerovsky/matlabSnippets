@@ -24,7 +24,7 @@ IDX=randsample(IDX, n);
 [X, Y, Z]=ind2sub(size(bw), IDX);
 
 if draw==true
-    scatter3(X, Y, Z, SZ, color, markertype);
+    scatter3(X, Y, Z, SZ, color, markertype, 'filled');
     axis equal
 end
 
