@@ -26,10 +26,6 @@ function q=drawVector(points, vectors, color, weight, MaxHeadsize)
 %    vectors -  Nx3 (3D) or Nx2 (2D) matrix; rows correspond to vectors
 %    color   - (optional) string ('r', 'red', etc), RGB triplet or
 %               hexadecimal string; default='red
-%            - Alternative: Nx3 array where each row contains the RGB
-%               triplet for the corresponding arrow. For this case arrows
-%               are drawn sucessively using a for loop making this version
-%               much slower. 
 %    weight  - (optional) scalar setting LineWidth; default=3;
 %    MaxHeadsize  - (optional) scalar setting arrow head size; default=weight;
 %
@@ -88,26 +84,23 @@ end
 if numel(color)==numel(vectors)   
     % draw stuff
     % % 3D case
-    hold on
     if size(vectors, 2)==3&&size(points, 2)==3 
         for i=1:size(color, 1)
-            quiver3(points(i, 1), points(i, 2), points(i, 3), vectors(i, 1), vectors(i, 2), vectors(i, 3), 0, 'Color', color(i, :),...
+            q=quiver3(points(:, 1), points(:, 2), points(:, 3), vectors(:, 1), vectors(:, 2), vectors(:, 3), 0, 'Color', color,...
                 'LineWidth', weight, 'MaxHeadSize', MaxHeadsize);
         end
     % % 2D case
     elseif size(vectors, 2)==2&&size(points, 2)==2 
-        for i=1:size(color, 1)
-            quiver(points(i, 1), points(i, 2), vectors(i, 1), vectors(i, 2), 0, 'Color', color(i, :),...
+        q=quiver(points(:, 1), points(:, 2), vectors(:, 1), vectors(:, 2), 0, 'Color', color,...
             'LineWidth', weight, 'MaxHeadSize', MaxHeadsize);
-        end
+
     % % dimension error or mismatch --> error message and stop     
     else 
         fprintf('input must be either 2D or 3D points and Vectors\n');
         fprintf('!!! "points" is %dD "vector" is %dD, \n both must be equal and either 2D or 3D\n',...
             size(points, 2), size(vectors, 2));
     end
-    hold off
-  q='Arrows with individual size have to be drawn successively since matlab does not allow for input of a colorVector. The quiver object can therefore not be saved. ';
+    
 else
     % draw stuff
     % % 3D case
