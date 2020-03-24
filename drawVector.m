@@ -21,9 +21,10 @@ function q=drawVector(points, vectors, color, weight, MaxHeadsize)
 %         drawVector(points, vectors, color, weigth, MaxHeadsize);
 %
 % Inputs:
-%    points  - Nx3 (3D) or Nx2 (2D) matrix; rows correspond to points 
+%    points  - 1x3/Nx3 (3D) or 1x2/Nx2 (2D) matrix; rows correspond to points 
 %                   if N==1 the same point will be used as origin for all vectors
-%    vectors -  Nx3 (3D) or Nx2 (2D) matrix; rows correspond to vectors
+%    vectors -  1x3/Nx3 (3D) or 1x2/Nx2 (2D) matrix; rows correspond to vectors
+%                   if N==1 the same vector will be used for all points
 %    color   - (optional) string ('r', 'red', etc), RGB triplet or
 %               hexadecimal string; default='red
 %            - Alternative: Nx3 array where each row contains the RGB
@@ -80,8 +81,12 @@ if nargin<5; MaxHeadsize=weight; end
 if size(points, 1)~=size(vectors, 1)
     if size(points, 1)==1
         points=repmat(points, size(vectors, 1), 1);
+%         fprintf('drawing all arrows at the single specified point\n');
+    elseif size(vectors, 1)==1
+        vectors=repmat(vectors, size(points, 1), 1);
+%         fprintf('drawing the single specified arrow at every point\n');
     else
-        fprintf('number of points (rows) must be 1 or equal to the number of vectors\n');
+        fprintf('rows in points and vector matrices must be 1 or equal to each other\n');
     end
 end
 
