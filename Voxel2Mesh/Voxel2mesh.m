@@ -4,7 +4,7 @@ function FV=Voxel2mesh(bw, polytype)
 % (i.e. each voxel face, facing the outside of the object);
 % mesh triangles follow the right hand rule with face normals pointing
 % outwards
-% the method for cleaning up duplicate veertices was taken from:
+% the method for cleaning up duplicate vertices was taken from:
 %       https://www.mathworks.com/matlabcentral/fileexchange/49691-patch-remesher
 % 
 % Syntax:  
