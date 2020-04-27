@@ -1,17 +1,17 @@
-function FV=multiMeshElipsoidCreator(radii, centres, deform, rotation, stepSize)
-% multiMeshElipsoidCreator - builds a mesh objects consisting of any number
+function BW=multiVoxelElipsoidCreator(radii, centres, deform, rotation, stepSize)
+% multiVoxelElipsoidCreator - builds a BW array object consisting of any number
 % of deformed and rotated spheres
 %
 % useful for generating meshes as test objects
 % Spheres are defined by radius and centre point. All user defined spheres
-% are merged to create a single mesh object. To get get different shapes
+% are merged to create a single  object. To get get different shapes
 % each sphere can be deformed and rotated. 
 %
-% The objects are defined as function over a meshgrid. The FV mesh is
-% created using the built in isosurface function.
+% The objects are defined as function over a meshgrid. The BW array is
+% obtained by thresholding the function
 % 
 % Syntax:  
-%     FV=multiMeshElipsoidCreator(radii, centres, deform, rotation)
+%     BW=multiMeshElipsoidCreator(radii, centres, deform, rotation)
 % 
 % Inputs:
 %    radii      - 1xN matrix defining the radius for each sphere to be built
@@ -31,8 +31,7 @@ function FV=multiMeshElipsoidCreator(radii, centres, deform, rotation, stepSize)
 %                 smaller step size -> more/smaller triangles
 % 
 % Outputs:
-%    FV - Face/Vertex struct defining one triangulated mesh. See
-%    documentation for built in isosurface function
+%    BW - uint8 binary array
 % 
 % Example: 
 %    % first define the input variables
@@ -63,11 +62,11 @@ function FV=multiMeshElipsoidCreator(radii, centres, deform, rotation, stepSize)
 %         0, 0, 0];
 %     
 %    % apply the function
-%     FV=multiMeshElipsoidCreator(r, c, deform, rotation, 0.5);
+%     BW=multiVoxelElipsoidCreator(r, c, deform, rotation, 0.5);
 %     
-%    % visualize the mesh
+%    % visualize the object
 %     figure
-%     P=patch(FV, 'FaceColor', 'none', 'EdgeColor', 'r');
+%     p=plotVoxelArray(BW);
 %     axis equal
 % 
 % Other m-files required: none
@@ -78,7 +77,7 @@ function FV=multiMeshElipsoidCreator(radii, centres, deform, rotation, stepSize)
 % Author: J. Benjamin Kacerovsky
 % Centre for Research in Neuroscience, McGill University
 % email: johannes.kacerovsky@mail.mcgill.ca
-% Created: 04-Mar-2020 ; Last revision: 04-Mar-2020 
+% Created: 27-Apr-2020 ; Last revision: 27-Apr-2020 
 
 % ------------- BEGIN CODE --------------
 
@@ -97,7 +96,7 @@ end
 mins=min(mins, [], 1);
 maxes=max(maxes, [], 1);
 [X, Y, Z]=meshgrid(mins(1):stepSize:maxes(1), mins(2):stepSize:maxes(2), mins(3):stepSize:maxes(3));
-SP=zeros(size(X, 1), size(X, 2), size(X, 3), length(radii));
+BW=zeros(size(X, 1), size(X, 2), size(X, 3), length(radii));
 % build elipsoids
 for i=1:length(radii)
     % get input values
@@ -142,10 +141,10 @@ for i=1:length(radii)
         Zrot=reshape(temp(:,3),sz);
     
     % calculate sphere/elipsoid function using rotated meshgrids
-    SP(:, :, :, i)=sqrt(((Xrot-x)*Xs).^2+((Yrot-y)*Ys).^2+((Zrot-z)*Zs).^2)/radii(i);
+    BW(:, :, :, i)=sqrt(((Xrot-x)*Xs).^2+((Yrot-y)*Ys).^2+((Zrot-z)*Zs).^2)/radii(i);
 end
-SP=min(SP, [],  4);
-FV=isosurface(X, Y, Z, SP, 1);
+BW=uint8(min(BW, [],  4)<1);
+% FV=isosurface(X, Y, Z, SP, 1);
 
 
 % ------------- END OF CODE --------------
