@@ -25,7 +25,8 @@ function FV=Voxel2mesh(bw, polytype)
 % 
 % Example: 
 %     % take any binary array as input 
-%     % in this case I am using the function starship_voxel.m from 
+%     % in this case I am using the function starship_voxel.m from :
+%           https://www.mathworks.com/matlabcentral/fileexchange/75241-build-mesh-or-voxel-spheres-ellipsoid-and-test-objects
 %     BW=starship_voxel;
 % 
 %     % generate triangulated surface mesh

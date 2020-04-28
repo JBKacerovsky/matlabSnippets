@@ -9,7 +9,7 @@ function [BW, p]=starship_voxel(display)
 % 
 % Inputs:
 %    display - boolean choice whether to display the FV mesh in a new figure
-%           1 -> display figure (default); requires voxel2mesh.m (see
+%           1 -> display figure (default); requires Voxel2mesh.m (see
 %           below)
 %           0 -> built FV but do not display (overruled if output p is
 %           defined)
@@ -18,8 +18,10 @@ function [BW, p]=starship_voxel(display)
 %    BW - uint8 binary array
 %    p  - patch object; displaying the binary array as a surface mesh
 % 
-% Other m-files required: none
-% Subfunctions: none
+% Other m-files required: to use the display option Voxel2mesh.m is
+% required:
+%           https://www.mathworks.com/matlabcentral/fileexchange/75240-voxel2mesh-plotvoxelarray?s_tid=prof_contriblnk
+% 
 % MAT-files required: none
 % 
 % See also: starship.m
