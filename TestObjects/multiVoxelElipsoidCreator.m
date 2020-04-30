@@ -27,8 +27,8 @@ function BW=multiVoxelElipsoidCreator(radii, centres, deform, rotation, stepSize
 %                 angle in degrees, by which the object is to be rotated
 %                 around the x, y, and z axis, respectively. 
 %    stepSize   - OPTIONAL scalar; defines the stepsize used by for the
-%                 meshgrid. default=1;
-%                 smaller step size -> more/smaller triangles
+%                 meshgrid, changing voxel dimension. default=1;
+%                 smaller step size -> more/smaller voxels
 % 
 % Outputs:
 %    BW - uint8 binary array
@@ -77,7 +77,7 @@ function BW=multiVoxelElipsoidCreator(radii, centres, deform, rotation, stepSize
 % Author: J. Benjamin Kacerovsky
 % Centre for Research in Neuroscience, McGill University
 % email: johannes.kacerovsky@mail.mcgill.ca
-% Created: 27-Apr-2020 ; Last revision: 27-Apr-2020 
+% Created: 27-Apr-2020 ; Last revision: 29-Apr-2020 
 
 % ------------- BEGIN CODE --------------
 
@@ -86,16 +86,18 @@ if nargin<5
 end
 
 % get dimensions and appropriate meshgrid
-mins=zeros(size(centres));
-maxes=mins;
+% mins=zeros(size(centres));
+maxes=zeros(size(centres));
 for i=1:length(radii)
-    mins(i, :)=centres(i, :)-radii(i);
+%     mins(i, :)=centres(i, :)-radii(i);
     maxes(i, :)=centres(i, :)+radii(i);
 end
 
-mins=min(mins, [], 1);
+% mins=min(mins, [], 1);
 maxes=max(maxes, [], 1);
-[X, Y, Z]=meshgrid(mins(1):stepSize:maxes(1), mins(2):stepSize:maxes(2), mins(3):stepSize:maxes(3));
+% [X, Y, Z]=meshgrid(mins(1):stepSize:maxes(1), mins(2):stepSize:maxes(2), mins(3):stepSize:maxes(3));
+[Y, X, Z]=meshgrid(1:stepSize:maxes(2), 1:stepSize:maxes(1), 1:stepSize:maxes(3));
+
 BW=zeros(size(X, 1), size(X, 2), size(X, 3), length(radii));
 % build elipsoids
 for i=1:length(radii)
