@@ -38,14 +38,15 @@ function [BW, p]=starship_voxel(display)
     if nargin<1 % default to no display
         display=0;
     end
+
     r=[11, 5, 6, 8, 8, 7, 7];
-    c=[20, 20, 20;
-        12, 17, 20;
-        7, 13, 20;
-        2, 17.5, 23;
-        2, 17.5, 18;
-        -5, 23, 16.8;
-        -5, 23, 26.5];
+    c=[40, 20, 20;
+        32, 17, 20;
+        27, 13, 20;
+        22, 17.5, 23;
+        22, 17.5, 18;
+        15, 23, 16.8;
+        15, 23, 26.5];
     deform=[1, 6, 1;
         6, 1, 6;
         1, 3, 3
@@ -66,11 +67,11 @@ function [BW, p]=starship_voxel(display)
     
    % visualize the object
    if display==1
-        figure
+%         figure
         FV=Voxel2mesh(BW, 3); 
-            temp=FV.vertices;
-            FV.vertices(:, 1)=temp(:, 2);
-            FV.vertices(:, 2)=temp(:, 1);
+%             temp=FV.vertices;
+%             FV.vertices(:, 1)=temp(:, 2);
+%             FV.vertices(:, 2)=temp(:, 1);
         p=patch(FV, 'FaceColor', 'b');
         axis equal
    end

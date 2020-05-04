@@ -38,13 +38,13 @@ if nargin<1
     display=1;
 end
 r=[11, 5, 6, 8, 8, 7, 7];
-c=[20, 20, 20;
-    12, 17, 20;
-    7, 13, 20;
-    2, 17.5, 23;
-    2, 17.5, 18;
-    -5, 23, 16.8;
-    -5, 23, 26.5];
+c=[40, 20, 20;
+    32, 17, 20;
+    27, 13, 20;
+    22, 17.5, 23;
+    22, 17.5, 18;
+    15, 23, 16.8;
+    15, 23, 26.5];
 deform=[1, 6, 1;
     6, 1, 6;
     1, 3, 3
@@ -63,7 +63,8 @@ rotation=[0, 0, 0;
 FV=multiMeshElipsoidCreator(r, c, deform, rotation, 0.5);
 % visualize the mesh
 if display==1||nargout>1
-    figure
+%     figure
+    FV.vertices=FV.vertices.*2-1;  % this is just to make it line up with starship_voxel.m
     p=patch(FV, 'FaceColor', 'b', 'EdgeColor', 'r', 'LineWidth', 1);
     axis equal
 end
