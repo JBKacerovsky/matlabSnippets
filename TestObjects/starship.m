@@ -1,4 +1,4 @@
-function [FV, p]=starship(display)
+function [FV, p]=starship(display, stepsize)
 % starship - builds a test object that resembles a starship as FV
 % triangulated mesh
 % 
@@ -37,6 +37,10 @@ function [FV, p]=starship(display)
 if nargin<1
     display=1;
 end
+
+if nargin<2
+    stepsize=0.5;
+end
 r=[11, 5, 6, 8, 8, 7, 7];
 c=[40, 20, 20;
     32, 17, 20;
@@ -60,7 +64,7 @@ rotation=[0, 0, 0;
     0, 0, 0; 
     0, 0, 0];
 % apply the function
-FV=multiMeshElipsoidCreator(r, c, deform, rotation, 0.5);
+FV=multiMeshElipsoidCreator(r, c, deform, rotation, stepsize);
 % visualize the mesh
 if display==1||nargout>1
 %     figure
