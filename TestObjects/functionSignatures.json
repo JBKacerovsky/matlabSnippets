@@ -1,0 +1,29 @@
+{
+  "_schemaVersion": "1.0.0",
+  "meshSphereCreator":
+  {
+     "inputs":
+     [
+        {"name":"r", "kind":"required", "type":["numeric", "scalar"], "purpose":"sphere radius"},
+        {"name":"centrePoint", "kind":"ordered", "type":["numeric", "numel=3", "vector"],"purpose":"defines sphere centre point"},
+        {"name":"Xsquash", "kind":"namevalue", "type":["numeric", "scalar"],"purpose":"deformation alon x-axis"},
+        {"name":"Ysquash", "kind":"namevalue", "type":["numeric", "scalar"],"purpose":"deformation alon y-axis"},
+        {"name":"Zsquash", "kind":"namevalue", "type":["numeric", "scalar"],"purpose":"deformation alon z-axis"},
+        {"name":"step", "kind":"namevalue", "type":["numeric", "scalar"],"purpose":"grid step size defines size of triangles"}
+     ]
+  },
+  
+  "voxelSphereCreator":
+  {
+     "inputs":
+     [
+        {"name":"r", "kind":"required", "type":["numeric", "scalar"], "purpose":"sphere radius"},
+        {"name":"centrePoint", "kind":"ordered", "type":["numeric", "numel=3", "vector"],"purpose":"defines sphere centre point"},
+        {"name":"sphereImage", "kind":"ordered", "type":["numeric", "3d"],"purpose":"matrix that the sphere/ellipsoid will be added to"},
+        {"name":"Xsquash", "kind":"namevalue", "type":["numeric", "scalar"],"purpose":"deformation alon x-axis"},
+        {"name":"Ysquash", "kind":"namevalue", "type":["numeric", "scalar"],"purpose":"deformation alon y-axis"},
+        {"name":"Zsquash", "kind":"namevalue", "type":["numeric", "scalar"],"purpose":"deformation alon z-axis"}
+     ]
+  }
+
+}

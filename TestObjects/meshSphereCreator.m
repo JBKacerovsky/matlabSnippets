@@ -7,17 +7,14 @@ function FV = meshSphereCreator(r, varargin)
 % geometry as a testing ground for more complex isosurfaces to try out and 
 % develop mesh operations. For creating perfect spheres there other options 
 % are likely better suited. 
-% The centerpoint of the spehere is selected so that all sphere vertices
-% are positive (i.e. xyz=[r+1, r+1, r+1])
+% By default the sphere will be centred around the origin [0, 0, 0].
+% Optionally a differeent Centre Point can be defined
 %
 % Syntax:  
-%     FV = meshSphereCreator(r)
-%     FV = meshSphereCreator(r, ...)
-% 
-% Inputs:
-%    r - scalar; radius of the sphere. 
-%    input2 - Description
-%    input3 - Description
+%     FV = meshSphereCreator(r);
+%     FV = meshSphereCreator(r, ..., 'Name', Value); 
+%     centrePoint – OPTIONAL; 1x3 vector; defining centre point of the sphere;
+%       default=[0, 0, 0]
 %
 % Optional Inputs as Name-Value pairs
 %    
@@ -32,15 +29,22 @@ function FV = meshSphereCreator(r, varargin)
 %    FV struct (output of built-in isosurface function)
 % 
 % Examples: 
-%     create a sphere with r=10
+%     % create a sphere with r=10
+%     figure
 %     sp=meshSphereCreator(10);
 %     patch(sp, 'FaceColor', 'none');
 %     axis equal
-% 
+%     
+%     
+%     % create sphere with r=10 centered at [20, 30, 0]; 
+%     sp=meshSphereCreator(10, [20, 30, 0]);
+%     patch(sp, 'FaceColor', 'none');
+%     axis equal
+%     
 %     % increase or decrease triangle resolution
 %     spFine=meshSphereCreator(10, 'step', 0.5);
 %     spCoarse=meshSphereCreator(10, 'step', 4);
-% 
+%     figure
 %     subplot(1,2,1)
 %     patch(spFine, 'FaceColor', 'none');
 %     axis equal
@@ -52,6 +56,7 @@ function FV = meshSphereCreator(r, varargin)
 % 
 %     % mesh spheres can be "squashed" along x, y, or z axis
 %     sp=meshSphereCreator(10, 'Ysquash', 3, 'Zsquash', 3, 'step', 0.5);
+%     figure
 %     patch(sp, 'FaceColor', 'none');
 %     axis equal
 % 
@@ -64,23 +69,29 @@ function FV = meshSphereCreator(r, varargin)
 % Author: J. Benjamin Kacerovsky
 % Centre for Research in Neuroscience, McGill University
 % email: johannes.kacerovsky@mail.mcgill.ca
-% Oct-2020 ; Last revision: 13-Jan-2020 
+% Oct-2020 ; Last revision: 05-Jun-2020 
 
 % ------------- BEGIN CODE --------------
 p=inputParser;
-addParameter(p, 'Xsquash', 1, @isnumeric);
-addParameter(p, 'Ysquash', 1, @isnumeric);
-addParameter(p, 'Zsquash', 1, @isnumeric);
-addParameter(p, 'step', 1, @isnumeric);
-parse(p, varargin{:});
+addRequired(p, 'r'); 
+addOptional(p, 'centrePoint', [0, 0, 0], @(x) isnumeric(x)&&(length(x)==3)&&isvector(x)); 
+addParameter(p, 'Xsquash', 1, @(x) isnumeric(x)&&isscalar(x));
+addParameter(p, 'Ysquash', 1, @(x) isnumeric(x)&&isscalar(x));
+addParameter(p, 'Zsquash', 1, @(x) isnumeric(x)&&isscalar(x));
+addParameter(p, 'step', 1, @(x) isnumeric(x)&&isscalar(x));
+
+parse(p, r, varargin{:});
+
+centrePoint=p.Results.centrePoint;
 Xs=p.Results.Xsquash;
 Ys=p.Results.Ysquash;
 Zs=p.Results.Zsquash;
 rr=p.Results.step;
-x=r+1;
-    [X, Y, Z]=meshgrid(1:rr:2*r+1, 1:rr:2*r+1, 1:rr:2*r+1);
-    A=sqrt(((X-x)*Xs).^2+((Y-x)*Ys).^2+((Z-x)*Zs).^2);
+
+
+    [X, Y, Z]=meshgrid(-r:rr:r, -r:rr:r, -r:rr:r);
+    A=sqrt((X*Xs).^2+(Y*Ys).^2+(Z*Zs).^2);
     FV=isosurface(X, Y, Z, A, r);
-   
+    FV.vertices=FV.vertices+centrePoint; 
 end
 % ------------- END OF CODE --------------

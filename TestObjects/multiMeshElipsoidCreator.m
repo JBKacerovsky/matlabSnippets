@@ -18,14 +18,17 @@ function FV=multiMeshElipsoidCreator(radii, centres, deform, rotation, stepSize)
 %    centres    - Nx3 matrix defining centre points for each sphere. Each row
 %                 should correspond to the x, y, z coordinates of the centre
 %                 point
-%    deform     - Nx3 matrix. The three numbers in each row define the
+%    deform     - OPTIONAL Nx3 matrix. The three numbers in each row define the
 %                 degree to which each sphere should be transformed along
 %                 the x, y, and z axis respectively; 
 %                 >1 results in "squashing" 
-%                 <1 results in "stretching" along the respective axis
-%    rotation   - Nx3 matrix. The three numbers in each row define the
+%                 <1 results in "stretching" along the respective axis 
+%                 default=ones(length(radii), 3) i.e no deformation
+%    rotation   - OPTIONAL Nx3 matrix. The three numbers in each row define the
 %                 angle in degrees, by which the object is to be rotated
 %                 around the x, y, and z axis, respectively. 
+%                 only relevant for deformed spheres (ellipsoids) 
+%                 default=zeros(length(radii), 3) i.e no rotation
 %    stepSize   - OPTIONAL scalar; defines the stepsize used by for the
 %                 meshgrid. default=1;
 %                 smaller step size -> more/smaller triangles
@@ -78,26 +81,29 @@ function FV=multiMeshElipsoidCreator(radii, centres, deform, rotation, stepSize)
 % Author: J. Benjamin Kacerovsky
 % Centre for Research in Neuroscience, McGill University
 % email: johannes.kacerovsky@mail.mcgill.ca
-% Created: 04-Mar-2020 ; Last revision: 04-Mar-2020 
+% Created: 04-Mar-2020 ; Last revision: 04-Jun-2020 
 
 % ------------- BEGIN CODE --------------
 
+if nargin<3
+    deform=ones(length(radii), 3); 
+end
+if nargin<4
+    rotation=zeros(length(radii), 3); 
+end
 if nargin<5
     stepSize=1;
 end
 
 % get dimensions and appropriate meshgrid
-mins=zeros(size(centres));
-maxes=mins;
-for i=1:length(radii)
-    mins(i, :)=centres(i, :)-radii(i);
-    maxes(i, :)=centres(i, :)+radii(i);
-end
+mins=centres-radii'./deform;
+maxes=centres+radii'./deform;
 
-mins=min(mins, [], 1);
-maxes=max(maxes, [], 1);
+mins=min(mins, [], 1)-2*stepSize/min(deform(:));
+maxes=max(maxes, [], 1)+2*stepSize/min(deform(:));
+
 [X, Y, Z]=meshgrid(mins(1):stepSize:maxes(1), mins(2):stepSize:maxes(2), mins(3):stepSize:maxes(3));
-SP=zeros(size(X, 1), size(X, 2), size(X, 3), length(radii));
+SP=zeros(size(X, 1), size(X, 2), size(X, 3), 1);
 % build elipsoids
 for i=1:length(radii)
     % get input values
@@ -107,11 +113,14 @@ for i=1:length(radii)
         Xs=deform(i, 1);
         Ys=deform(i, 2);
         Zs=deform(i, 3);
+       
+    
+    % calculate rotation matrices
+    if any(rotation(i, :)~=0)
         angle1=rotation(i, 1); 
         angle2=rotation(i, 2);  
         angle3=rotation(i, 3); 
         
-    % calculate rotation matrices
         rotMatX=[1, 0, 0;
                 0, cosd(angle1), -sind(angle1);
                 0, sind(angle1), cosd(angle1)];
@@ -121,6 +130,11 @@ for i=1:length(radii)
         rotMatZ=[cosd(angle3), -sind(angle3), 0;
                 sind(angle3), cosd(angle3), 0;
                 0, 0, 1];
+    else
+        rotMatX=eye(3);     % matrix remains unchanged (i.e. no rotation) when multiplied with identity matrix eye(3)
+        rotMatY=rotMatX; 
+        rotMatZ=rotMatX; 
+    end
         
      %rotate meshgrids
         % meshgrid rotation adapted from:
@@ -129,8 +143,9 @@ for i=1:length(radii)
         
         % by temporarily shifting meshgrid coordinates so that the centre
         % of the object is at the origin we can rotate the coordinates (and
-        % ultimately the object) around the object centre (keeping it "i
-        % place"); 
+        % ultimately the object) around the object centre (keeping it "in
+        % place" aftere rotation, rather than rotating the object loaction
+        % around the origin); 
         
         C=centres(i, :);
         temp=temp-C;
@@ -142,9 +157,11 @@ for i=1:length(radii)
         Zrot=reshape(temp(:,3),sz);
     
     % calculate sphere/elipsoid function using rotated meshgrids
-    SP(:, :, :, i)=sqrt(((Xrot-x)*Xs).^2+((Yrot-y)*Ys).^2+((Zrot-z)*Zs).^2)/radii(i);
+    SP(:, :, :, 1)=sqrt(((Xrot-x)*Xs).^2+((Yrot-y)*Ys).^2+((Zrot-z)*Zs).^2)/radii(i);
+    SP(:, :, :, 2)=min(SP, [],  4); % bringing this inside the loop avoids inflating the memory (which slows down the code) 
 end
-SP=min(SP, [],  4);
+% SP=min(SP, [],  4);
+SP=SP(:, :, :, 2);
 FV=isosurface(X, Y, Z, SP, 1);
 
 

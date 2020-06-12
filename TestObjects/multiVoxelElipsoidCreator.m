@@ -11,23 +11,29 @@ function BW=multiVoxelElipsoidCreator(radii, centres, deform, rotation, stepSize
 % obtained by thresholding the function
 % 
 % Syntax:  
+%     BW=multiMeshElipsoidCreator(radii, centres)
+%     BW=multiMeshElipsoidCreator(radii, centres, deform)
 %     BW=multiMeshElipsoidCreator(radii, centres, deform, rotation)
+%     BW=multiMeshElipsoidCreator(radii, centres, deform, rotation, stepSize)
 % 
 % Inputs:
 %    radii      - 1xN matrix defining the radius for each sphere to be built
 %    centres    - Nx3 matrix defining centre points for each sphere. Each row
 %                 should correspond to the x, y, z coordinates of the centre
 %                 point
-%    deform     - Nx3 matrix. The three numbers in each row define the
+%    deform     - OPTIONAL Nx3 matrix. The three numbers in each row define the
 %                 degree to which each sphere should be transformed along
 %                 the x, y, and z axis respectively; 
 %                 >1 results in "squashing" 
-%                 <1 results in "stretching" along the respective axis
-%    rotation   - Nx3 matrix. The three numbers in each row define the
+%                 <1 results in "stretching" along the respective axis 
+%                 default=ones(length(radii), 3) i.e no deformation
+%    rotation   - OPTIONAL Nx3 matrix. The three numbers in each row define the
 %                 angle in degrees, by which the object is to be rotated
 %                 around the x, y, and z axis, respectively. 
+%                 only relevant for deformed spheres (ellipsoids) 
+%                 default=zeros(length(radii), 3) i.e no rotation
 %    stepSize   - OPTIONAL scalar; defines the stepsize used by for the
-%                 meshgrid, changing voxel dimension. default=1;
+%                 meshgrid. default=1;
 %                 smaller step size -> more/smaller voxels
 % 
 % Outputs:
@@ -77,28 +83,28 @@ function BW=multiVoxelElipsoidCreator(radii, centres, deform, rotation, stepSize
 % Author: J. Benjamin Kacerovsky
 % Centre for Research in Neuroscience, McGill University
 % email: johannes.kacerovsky@mail.mcgill.ca
-% Created: 27-Apr-2020 ; Last revision: 29-Apr-2020 
+% Created: 27-Apr-2020 ; Last revision: 05-Jun-2020 
 
 % ------------- BEGIN CODE --------------
 
+if nargin<3
+    deform=ones(length(radii), 3); 
+end
+if nargin<4
+    rotation=zeros(length(radii), 3); 
+end
 if nargin<5
     stepSize=1;
 end
 
-% get dimensions and appropriate meshgrid
-% mins=zeros(size(centres));
-maxes=zeros(size(centres));
-for i=1:length(radii)
-%     mins(i, :)=centres(i, :)-radii(i);
-    maxes(i, :)=centres(i, :)+radii(i);
-end
 
-% mins=min(mins, [], 1);
-maxes=max(maxes, [], 1);
-% [X, Y, Z]=meshgrid(mins(1):stepSize:maxes(1), mins(2):stepSize:maxes(2), mins(3):stepSize:maxes(3));
+% get dimensions and appropriate meshgrid
+maxes=centres+radii'./deform;
+maxes=max(maxes, [], 1)+2*stepSize/min(deform(:));
+
 [Y, X, Z]=meshgrid(1:stepSize:maxes(2), 1:stepSize:maxes(1), 1:stepSize:maxes(3));
 
-BW=zeros(size(X, 1), size(X, 2), size(X, 3), length(radii));
+BW=zeros(size(X, 1), size(X, 2), size(X, 3), 1);
 % build elipsoids
 for i=1:length(radii)
     % get input values
@@ -143,10 +149,11 @@ for i=1:length(radii)
         Zrot=reshape(temp(:,3),sz);
     
     % calculate sphere/elipsoid function using rotated meshgrids
-    BW(:, :, :, i)=sqrt(((Xrot-x)*Xs).^2+((Yrot-y)*Ys).^2+((Zrot-z)*Zs).^2)/radii(i);
+    BW(:, :, :, 1)=sqrt(((Xrot-x)*Xs).^2+((Yrot-y)*Ys).^2+((Zrot-z)*Zs).^2)/radii(i);
+    BW(:, :, :, 2)=min(BW, [], 4); 
 end
-BW=uint8(min(BW, [],  4)<1);
-% FV=isosurface(X, Y, Z, SP, 1);
+BW=BW(:, :, :, 2); 
+BW=uint8(BW<1);
 
 
 % ------------- END OF CODE --------------
