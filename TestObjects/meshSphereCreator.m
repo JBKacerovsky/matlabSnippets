@@ -89,7 +89,7 @@ Zs=p.Results.Zsquash;
 rr=p.Results.step;
 
 
-    [X, Y, Z]=meshgrid(-r:rr:r, -r:rr:r, -r:rr:r);
+    [X, Y, Z]=meshgrid(-(r+1):rr:(r+1), -(r+1):rr:(r+1), -(r+1):rr:(r+1));
     A=sqrt((X*Xs).^2+(Y*Ys).^2+(Z*Zs).^2);
     FV=isosurface(X, Y, Z, A, r);
     FV.vertices=FV.vertices+centrePoint; 
