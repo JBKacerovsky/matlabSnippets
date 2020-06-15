@@ -34,8 +34,8 @@ function FV=multiMeshElipsoidCreator(radii, centres, deform, rotation, stepSize)
 %                 smaller step size -> more/smaller triangles
 % 
 % Outputs:
-%    FV - Face/Vertex struct defining one triangulated mesh. See
-%    documentation for built in isosurface function
+%    FV         - Face/Vertex struct defining one triangulated mesh. See
+%                 documentation for built in isosurface function
 % 
 % Example: 
 %    % first define the input variables
