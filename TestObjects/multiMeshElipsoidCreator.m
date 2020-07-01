@@ -99,10 +99,14 @@ end
 mins=centres-radii'./deform;
 maxes=centres+radii'./deform;
 
-mins=min(mins, [], 1)-2*stepSize/min(deform(:));
-maxes=max(maxes, [], 1)+2*stepSize/min(deform(:));
+tempStep=stepSize;
+if tempStep < 1
+    tempStep = 1; 
+end
+mins=min(min(mins, [], 1)-2*tempStep/min(deform(:))); 
+maxes=max(max(maxes, [], 1)+2*tempStep/min(deform(:)));
 
-[X, Y, Z]=meshgrid(mins(1):stepSize:maxes(1), mins(2):stepSize:maxes(2), mins(3):stepSize:maxes(3));
+[X, Y, Z]=meshgrid(mins:stepSize:maxes, mins:stepSize:maxes, mins:stepSize:maxes);
 SP=zeros(size(X, 1), size(X, 2), size(X, 3), 1);
 % build elipsoids
 for i=1:length(radii)
