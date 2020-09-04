@@ -15,7 +15,8 @@ insertTemplateHeader - inserts a predefined header template into an active scrip
 ## VECTOR FUNCTIONS:
 
 [![View drawVector- draws 2D or 3D vectors from specified points on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/73734-drawvector-draws-2d-or-3d-vectors-from-specified-points) drawVector on File Exchange
-drawVector- draws 2D or 3D vectors from specified points 
+
+drawVector - draws 2D or 3D vectors from specified points 
 
 [![View planePlotter on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/73731-planeplotter) planePlotter - on File Exchange
 
