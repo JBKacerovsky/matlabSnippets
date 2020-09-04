@@ -43,7 +43,7 @@ drawConnectinCylinders – creates cylinder meshes of defined radius between two
 
 starship – uses multiMeshEllipsoidCreator to build a FV mesh test object, which resembles a starship (in my opinion) 
 
-starship_voxel – uses multiVoxeelEllipsoidCreator to build a test voxelized object, which resembles a starship (in my opinion) 
+starship_voxel – uses multiVoxelEllipsoidCreator to build a test voxelized object, which resembles a starship (in my opinion) 
 
 [![Voxel2mesh - plotVoxelArray on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75240-voxel2mesh-plotvoxelarray?s_tid=prof_contriblnk) 
 
