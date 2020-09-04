@@ -33,9 +33,25 @@ VoxelSphereCreator - creates a (binary) voxelated sphere of defined radius aroun
 meshSphereCreator - Creates a triangulated sphere of a defined radius using Matlab's built isosurface function. 
     spheres can optionally be deformed along the main axes to create ellipsoids
     
-multiMeshEllipsoidCreator - creates a series of spheres or ellipsoids (deformed spheres). surfaces of overlapping spheres are merged 	into one continuous mesh
+multiMeshEllipsoidCreator - creates a series of spheres or ellipsoids (deformed spheres) as FV triangle meshes. surfaces of overlapping spheres are merged into one continuous mesh
+
+multiMeshtoroidCreator - creates a series of toroids as FV triangle meshes. toroids can be deformed. 
+
+multiVoxelEllipsoidCreator - creates a series of spheres or ellipsoids (deformed spheres) as voxel array. 
+
+drawConnectinCylinders – creates cylinder meshes of defined radius between two sets of points
+
+starship – uses multiMeshEllipsoidCreator to build a FV mesh test object, which resembles a starship (in my opinion) 
+
+starship_voxel – uses multiVoxeelEllipsoidCreator to build a test voxelized object, which resembles a starship (in my opinion) 
 
 [![Voxel2mesh - plotVoxelArray on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75240-voxel2mesh-plotvoxelarray?s_tid=prof_contriblnk) 
+
+functions for meshing and displaying voxel data
+
+Voxel2mesh – creates a triangle or quad mesh FV struct from a voxel array. for each surface face of thee voxel array 1 quad or 2 triangles will be added. i.e. the resulting mesh follows the contours of the voxelized surface (without interpolation as e.g. marching cubes would do) 
+
+plotVoxelArray – uses Voxel2mesh to display a voxel array as a malab figure
 
 TINY FUNCTIONS:
 these are tiny snippets (just a few lines) that really don't do very much but do save a bit of repetitive typing. These were nuisance enough for me at one point to make them into functions
