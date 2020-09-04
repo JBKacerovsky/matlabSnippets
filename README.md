@@ -25,7 +25,7 @@ planePlotter - draws a plane defined by a point and normal vector
 getVectorAngle - calculates the angle between 2 n-dimensional vectors 
   (built for 2D and 3D, but should work for all dimensions)
 
-## SPHERE FUNCTIONS (BUILD TEST OBJECTS):
+## FUNCTIONS TO BUILD MESH/VOXEL SPHERES, ELLIPSOIDS, TOROIDS, AND TEST OBJECTS:
 
 [![Mesh/Voxel spheres, ellipsoids, toroids, and test objects on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75241-mesh-voxel-spheres-ellipsoids-toroids-and-test-objects?s_tid=prof_contriblnk) Mesh/Voxel spheres, ellipsoids, toroids, and test objects on File Exchange
 
