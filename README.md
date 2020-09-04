@@ -8,6 +8,7 @@ this repository is linked to MathWorks
 some parts of this collection of functions have also been submitted to the file exchange as seperate submissions (to make it easier for them to be found on the exchange, and to allow them to be downloaded alone, without adding this entire collection)
 
 ## EDITOR FUNCTIONS:
+[![insertTemplateHeader on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/79903-inserttemplateheader) insertTemplateHeader on File Exchange
 
 insertTemplateHeader - inserts a predefined header template into an active script; there are a number of similar functions on the MathWorks exchange. As far as I could find, these typically create a new script with the header template (and some seem to require going through a GUI,... while extra typing is exactly what I wanted to avoid). I wrote this version since I generally wanted to be able to insert a header into a function, at the end of my workflow, once I am done building a function and decide to publish it or to add a header so I can remember what it does later on.
 
