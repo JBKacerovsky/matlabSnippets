@@ -23,6 +23,8 @@ getVectorAngle - calculates the angle between 2 n-dimensional vectors
   (built for 2D and 3D, but should work for all dimensions)
 
 SPHERE FUNCTIONS (BUILD TEST OBJECTS):
+
+[![Mesh/Voxel spheres, ellipsoids, toroids, and test objects on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75241-mesh-voxel-spheres-ellipsoids-toroids-and-test-objects?s_tid=prof_contriblnk) drawVector on File Exchange
 These functions were primarily written to create test objects of known underlying geometry to test functions on voxelated objects, or isosurface FV meshes
 
 VoxelSphereCreator - creates a (binary) voxelated sphere of defined radius around a defined point in a given 3D matrix/image. 
@@ -31,6 +33,7 @@ VoxelSphereCreator - creates a (binary) voxelated sphere of defined radius aroun
 meshSphereCreator - Creates a triangulated sphere of a defined radius using Matlab's built isosurface function. 
     spheres can optionally be deformed along the main axes to create ellipsoids
 
+[![Voxel2mesh - plotVoxelArray on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75240-voxel2mesh-plotvoxelarray?s_tid=prof_contriblnk) 
 
 TINY FUNCTIONS:
 these are tiny snippets (just a few lines) that really don't do very much but do save a bit of repetitive typing. These were nuisance enough for me at one point to make them into functions
