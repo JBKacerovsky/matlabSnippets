@@ -39,3 +39,5 @@ isoSwitch - switch the 1st and 2nd column of vertex coordinates (x, y) in an FV 
 	For some reason, x and y coordinates are switched when using the isosurface function to create a triangulated mesh from a binary image (bw matrix), with respect to the original image. These three lines switch them back (aligning the mesh and original image)
 
 findIdx - returns xyz index of voxels > 0 as Nx3 matrix
+
+sortedKmeans - performs kmeans on 1D data and assigns IDs so that ID = 1 has the largest ('descending') or smallest ('ascending') centroid value, ID = 2 the second largest etc
