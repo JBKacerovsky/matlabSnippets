@@ -5,24 +5,25 @@ More Snippets will be added over time.
 this repository is linked to MathWorks
 [![View usefulSnippets on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/73883-usefulsnippets)
 
-EDITOR FUNCTIONS:
+some parts of this collection of functions have also been submitted to the file exchange as seperate submissions (to make it easier for them to be found on the exchange, and to allow them to be downloaded alone, without adding this entire collection)
+
+## EDITOR FUNCTIONS:
 
 insertTemplateHeader - inserts a predefined header template into an active script; there are a number of similar functions on the MathWorks exchange. As far as I could find, these typically create a new script with the header template (and some seem to require going through a GUI,... while extra typing is exactly what I wanted to avoid). I wrote this version since I generally wanted to be able to insert a header into a function, at the end of my workflow, once I am done building a function and decide to publish it or to add a header so I can remember what it does later on.
 
-VECTOR FUNCTIONS:
-
-drawVector- draws 2D or 3D vectors from specified points 
+## VECTOR FUNCTIONS:
 
 [![View drawVector- draws 2D or 3D vectors from specified points on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/73734-drawvector-draws-2d-or-3d-vectors-from-specified-points) drawVector on File Exchange
-
-planePlotter - draws a plane defined by a point and normal vector
+drawVector- draws 2D or 3D vectors from specified points 
 
 [![View planePlotter on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/73731-planeplotter) planePlotter - on File Exchange
+
+planePlotter - draws a plane defined by a point and normal vector
 
 getVectorAngle - calculates the angle between 2 n-dimensional vectors 
   (built for 2D and 3D, but should work for all dimensions)
 
-SPHERE FUNCTIONS (BUILD TEST OBJECTS):
+## SPHERE FUNCTIONS (BUILD TEST OBJECTS):
 
 [![Mesh/Voxel spheres, ellipsoids, toroids, and test objects on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75241-mesh-voxel-spheres-ellipsoids-toroids-and-test-objects?s_tid=prof_contriblnk) Mesh/Voxel spheres, ellipsoids, toroids, and test objects on File Exchange
 A number of functions to build gemotric objects (spheres, ellipsoids, torroids) as either FV meshes or voxel arrays. 
@@ -45,6 +46,7 @@ starship – uses multiMeshEllipsoidCreator to build a FV mesh test object, whic
 
 starship_voxel – uses multiVoxelEllipsoidCreator to build a test voxelized object, which resembles a starship (in my opinion) 
 
+## Voxel2mesh
 [![Voxel2mesh - plotVoxelArray on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75240-voxel2mesh-plotvoxelarray?s_tid=prof_contriblnk) 
 
 functions for meshing and displaying voxel data
@@ -53,7 +55,7 @@ Voxel2mesh – creates a triangle or quad mesh FV struct from a voxel array. fo
 
 plotVoxelArray – uses Voxel2mesh to display a voxel array as a malab figure
 
-TINY FUNCTIONS:
+## TINY FUNCTIONS:
 these are tiny snippets (just a few lines) that really don't do very much but do save a bit of repetitive typing. These were nuisance enough for me at one point to make them into functions
 
 isoSwitch - switch the 1st and 2nd column of vertex coordinates (x, y) in an FV struct.
