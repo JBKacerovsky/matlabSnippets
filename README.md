@@ -24,14 +24,16 @@ getVectorAngle - calculates the angle between 2 n-dimensional vectors
 
 SPHERE FUNCTIONS (BUILD TEST OBJECTS):
 
-[![Mesh/Voxel spheres, ellipsoids, toroids, and test objects on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75241-mesh-voxel-spheres-ellipsoids-toroids-and-test-objects?s_tid=prof_contriblnk) drawVector on File Exchange
-These functions were primarily written to create test objects of known underlying geometry to test functions on voxelated objects, or isosurface FV meshes
+[![Mesh/Voxel spheres, ellipsoids, toroids, and test objects on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75241-mesh-voxel-spheres-ellipsoids-toroids-and-test-objects?s_tid=prof_contriblnk) Mesh/Voxel spheres, ellipsoids, toroids, and test objects on File Exchange
+A number of functions to build gemotric objects (spheres, ellipsoids, torroids) as either FV meshes or voxel arrays. 
 
 VoxelSphereCreator - creates a (binary) voxelated sphere of defined radius around a defined point in a given 3D matrix/image. 
     spheres can optionally be deformed along the main axes to create ellipsoids
 
 meshSphereCreator - Creates a triangulated sphere of a defined radius using Matlab's built isosurface function. 
     spheres can optionally be deformed along the main axes to create ellipsoids
+    
+multiMeshEllipsoidCreator - creates a series of spheres or ellipsoids (deformed spheres). surfaces of overlapping spheres are merged 	into one continuous mesh
 
 [![Voxel2mesh - plotVoxelArray on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75240-voxel2mesh-plotvoxelarray?s_tid=prof_contriblnk) 
 
