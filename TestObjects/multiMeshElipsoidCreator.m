@@ -162,6 +162,10 @@ for i=1:length(radii)
     
     % calculate sphere/elipsoid function using rotated meshgrids
     SP(:, :, :, 1)=sqrt(((Xrot-x)*Xs).^2+((Yrot-y)*Ys).^2+((Zrot-z)*Zs).^2)/radii(i);
+% %         % the following would be a little faster than the above line 
+% %         % but theree are very slight differences in the rusult (I believe
+% %         % due to rounding?) 
+% %         SP(:, :, :, 1)=(((Xrot-x)*Xs).^2+((Yrot-y)*Ys).^2+((Zrot-z)*Zs).^2)/(radii(i)^2); 
     SP(:, :, :, 2)=min(SP, [],  4); % bringing this inside the loop avoids inflating the memory (which slows down the code) 
 end
 % SP=min(SP, [],  4);
