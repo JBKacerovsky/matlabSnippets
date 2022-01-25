@@ -24,7 +24,7 @@ function subFV=submesh(FV, vertexIDs)
 % Author: J. Benjamin Kacerovsky
 % Centre for Research in Neuroscience, McGill University 
 % email: johannes.kacerovsky@mail.mcgill.ca
-% Created: 23-Oct-2019 ; Last revision: 24-Jan-2022 
+% Created: 23-Oct-2019 ; Last revision: 08-Jul-2021 
 
 % ------------- BEGIN CODE --------------
 
@@ -35,10 +35,6 @@ function subFV=submesh(FV, vertexIDs)
                 % but the only one I could come up with was 3x slower
        vertexIDs=find(vertexIDs); 
     end
-    
-    FV.vertices = checkArrayOrientation(FV.vertices);
-    FV.faces = checkArrayOrientation(FV.faces);
-    
     vnew=FV.vertices(vertexIDs, :);
     
     if (size(FV.faces, 2))==3   %triangle mesh
@@ -69,7 +65,7 @@ end
 
 function x = checkArrayOrientation(x)
 % enforces that dim1 > dim2
-    if size(x, 2) > size(x, 1) && size (x, 2) > 3
+    if size(x, 2) > size(x, 1) & size (x, 2) > 3
         x = x';
     end
 end
